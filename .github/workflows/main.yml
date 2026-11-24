@@ -16,14 +16,16 @@ jobs:
       
       #step 2
       - name: Full scan
-        run: semgrep scan --sarif --output report.sarif --metrics=off --config="auto" .
+        run: semgrep scan --sarif --output report.sarif --metrics=off --config="p/default" .
 
       #step 3 
       - name: Save report as artifcat
+        if: always()
         uses: actions/upload-artifact@v7.0.2
         with: 
           name: report.sarif
           path: report.sarif
+          if-no-files-found: warn
 
 
       #step 4
