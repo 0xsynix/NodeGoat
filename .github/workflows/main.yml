@@ -26,14 +26,6 @@ jobs:
           name: report.sarif
           path: report.sarif
           if-no-files-found: warn
-
-
-      #step 4
-      - name: Download the artifact
-        uses: actions/download-artifact@v8.0.2
-        with:
-          name: report.sarif
-            
             
       
 
