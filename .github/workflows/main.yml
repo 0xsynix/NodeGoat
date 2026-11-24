@@ -1,0 +1,43 @@
+name: CI
+
+on: [push]
+
+jobs:
+  sast_scan:
+    name: Semgrep Full Scan
+    runs-on: ubuntu-latest
+    container:
+      image: returntocorp/semgrep
+
+    steps:
+      #step 1 
+      - name: Checkout code
+        uses: actions/checkout@v2.8.0
+      
+      #step 2
+      - name: Full scan
+        run: |
+          semgrep \ 
+            --sarif --output report.sarif
+            --metrics=off \
+            --config="default"
+
+      #step 3 
+      - name: Save report as artifcat
+        uses: actions/upload-artifact@v7.0.2
+        with: 
+          name: report.sarif
+          path: report.sarif
+
+
+      #step 4
+      - name: Download the artifact
+        uses: actions/download-artifact@v8.0.2
+        with:
+          name: report.sarif
+            
+            
+      
+
+        
+
