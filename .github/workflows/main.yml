@@ -16,12 +16,7 @@ jobs:
       
       #step 2
       - name: Full scan
-        run: |
-          semgrep \ 
-            --sarif --output report.sarif
-            --metrics=off \
-            --config="auto" \
-            .
+        run: semgrep scan --sarif --output report.sarif --metrics=off --config="auto" .
 
       #step 3 
       - name: Save report as artifcat
